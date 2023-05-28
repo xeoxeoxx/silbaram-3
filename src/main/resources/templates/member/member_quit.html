@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
 <head>
     <meta charset="UTF-8">
-    <title>비밀번호 변경</title>
+    <title>회원탈퇴</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link th:inline="css" th:href="@{/css/mypage.css}" rel="stylesheet">
     <style>
         div.hidden {
             display: none;
@@ -14,7 +17,8 @@
 </head>
 <body>
 
-<h1>비밀번호 변경</h1>
+<div layout:fragment="Content" class="mypageWrap">
+<h1>회원탈퇴</h1>
 <ul>
     <li>
         <a href="/index">홈</a>
@@ -44,6 +48,7 @@
     </div>
 
 </form >
+</div>
 <script src="/js/signup.js"></script>
 <script type="text/javascript">
 
