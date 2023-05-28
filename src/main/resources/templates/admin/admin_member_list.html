@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 조회</title>
+    <link th:inline="css" th:href="@{/css/admin.css}" rel="stylesheet">
+</head>
+<body>
+
+<div layout:fragment="Content">
+
+        <h5>User List</h5>
+
+        <form action="/admin/admin_book_list" method="get" class="adminListForm memberAdminForm">
+            <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+
+            <div class="searchBox">
+                <select id="searchType" class="form-select" name="types">
+                    <option value="t" th:selected="${pageRequestDTO.types == 't'}">UserId</option>
+                    <option value="c" th:selected="${pageRequestDTO.types == 'c'}">name</option>
+                    <option value="w" th:selected="${pageRequestDTO.types == 'w'}">nickName</option>
+                    <option value="tc" th:selected="${pageRequestDTO.types == 'tc'}">UserId+name</option>
+                    <option value="tcw" th:selected="${pageRequestDTO.types == 'tcw'}">UserId+name+nickName</option>
+                </select>
+                <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}" placeholder="키워드를 입력해 주세요">
+            </div>
+
+            <div class="buttonBox">
+                <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
+                <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
+            </div>
+        </form>
+
+        <div class="adminListTable">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">mid</th>
+                    <th scope="col">userId</th>
+                    <th scope="col">password</th>
+                    <th scope="col">nickName</th>
+                    <th scope="col">name</th>
+                    <th scope="col">birthDate</th>
+                    <th scope="col">gender</th>
+                    <th scope="col">phoneNumber</th>
+                    <th scope="col">email</th>
+                    <th scope="col">zipcode</th>
+                    <th scope="col">address1</th>
+                    <th scope="col">address2</th>
+                    <th scope="col">socialLogin</th>
+                    <th scope="col">isAdmin</th>
+                    <th scope="col">regDate</th>
+                    <th scope="col">uuid</th>
+                </tr>
+                </thead>
+
+                <tbody th:with="link = ${pageRequestDTO.getLink()}">
+                <tr th:each="dto:${responseDTO.dtoList}">
+                    <th scope="col">[[${dto.mid}]]</th>
+                    <td>[[${dto.userId}]]</td>
+                    <td>[[${dto.password}]]</td>
+                    <td>[[${dto.nickName}]]</td>
+                    <td>[[${dto.name}]]</td>
+                    <td>[[${dto.birthDate}]]</td>
+                    <td>[[${dto.gender}]]</td>
+                    <td>[[${dto.phoneNumber}]]</td>
+                    <td>[[${dto.email}]]</td>
+                    <td>[[${dto.zipcode}]]</td>
+                    <td>[[${dto.address1}]]</td>
+                    <td>[[${dto.address2}]]</td>
+                    <td>[[${dto.socialLogin}]]</td>
+                    <td>[[${dto.isAdmin}]]</td>
+                    <td>[[${#temporals.format(dto.regDate,'yyyy-MM-dd')}]]</td>
+                    <td>[[${dto.uuid}]]</td>
+                </tr>
+                </tbody>
+            </table>
+                    <!--페이지 버튼-->
+
+            <ul class="pagination_member_list">
+                <div th:if="${responseDTO.total > 0}">
+                    <li th:if="${responseDTO.prev}">
+                        <a th:data-num="${responseDTO.start - 1}">Previous</a>
+                    </li>
+                    <!--#numbers.sequence : 특정한 범위의 연속된 숫자를 만듦-->
+                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                        <li th:class="${responseDTO.page == i} ? 'active' : ''">
+                            <a th:data-num="${i}">[[${i}]]</a>
+                            <!--data-num이라는 속성으로 페이지 처리-->
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:if="${responseDTO.next}">
+                        <a class="page-link" th:data-num="${responseDTO.end + 1}">Next</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+
+<script layout:fragment="script" th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        const urlParams = new URL(location.href).searchParams;
+        const el = document.getElementById('searchType');
+        const len = el.options.length;
+
+        // 문의 목록 페이지가 검색 목록을 보여주는 페이지라면 (검색결과 화면이라면)
+        if(urlParams.get('types') !== null){
+            const str = urlParams.get('types');
+            console.log(str)
+            for (let i=0; i<len; i++){
+                //select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+                if(el.options[i].value == str){
+                    el.options[i].selected = true;
+                }
+            }
+        }else{
+            el.options[0].selected = true;
+        }
+    });
+
+    document.querySelector(".pagination_member_list").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const target = e.target;
+
+        if (target.tagName !== 'A') {
+            return;
+        }
+
+        const num = target.getAttribute("data-num");
+        const formObj = document.querySelector(".memberAdminForm");
+
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`;
+        formObj.submit();
+
+    }, false)
+
+
+    document.querySelector(".clearBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        self.location = '/admin/admin_member_list';
+    }, false)
+
+</script>
+</body>
+</html>

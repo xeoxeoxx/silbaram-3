@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+    <link th:inline="css" th:href="@{/css/index_style.css}" rel="stylesheet">
+</head>
+<body>
+    <div layout:fragment="nav">
+        <div th:replace="fragments/nav" :: NavFragment></div>
+    </div>
+
+    <div layout:fragment="Content" class="indexBox">
+        <div class="banner_box">
+            <h3>기획전</h3>
+            <div class="banner_wrap">
+                <div class="inner_banner banner1">
+                    <img th:src="@{/resources/banner1.jpg}" alt="">
+                </div>
+                <div class="inner_banner banner2">
+                    <img th:src="@{/resources/banner2.jpg}" alt="">
+                </div>
+                <div class="inner_banner banner3">
+                    <img th:src="@{/resources/banner3.jpg}" alt="">
+                </div>
+                <div class="inner_banner banner4">
+                    <img th:src="@{/resources/banner4.jpg}" alt="">
+                </div>
+                <div class="inner_banner banner5">
+                    <img th:src="@{/resources/banner5.jpg}" alt="">
+                </div>
+                <div class="inner_banner banner6">
+                    <img th:src="@{/resources/banner6.jpg}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="jumpTo">
+            <div id="board">
+                <a href="/board/request_book_list">
+                    <img class="icons" th:src="@{/resources/lightbulb.png}">
+                    <span>책 요청<br>모아보기</span>
+                </a>
+            </div>
+            <div id="best">
+                <a href="/products/list">
+                    <img class="icons" th:src="@{/resources/bestseller.png}">
+                    <span>베스트셀러</span>
+                </a>
+            </div>
+            <div id="newbooks">
+                <a href="/products/list">
+                    <img class="icons" th:src="@{/resources/new.png}">
+                    <span>신간도서</span>
+                </a>
+            </div>
+            <div id="qna">
+                <a href="/board/list_qna">
+                    <img class="icons" th:src="@{/resources/conversation.png}">
+                    <span>1:1<br>문의하기</span>
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script th:inline="javascript" type="text/javascript" th:src="@{/js/audioplayer.js}"></script>
+    <script layout:fragment="script" th:inline="javascript">
+
+    </script>
+
+</body>
+</html>

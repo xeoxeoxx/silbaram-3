@@ -1,0 +1,7 @@
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user01", "passwd01", "user1", "user01", "1999-11-11", "M", "ddh05130@hanmail.net", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user02", "passwd02", "user2", "user02", "1999-11-11", "F", "ddh05130@naver.com", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user03", "passwd03", "user3", "user03", "1999-11-11", "M", "z3943276@gmail.com", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user04", "passwd04", "user4", "user04", "1999-11-11", "F", "z3943276@naver.com", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user05", "passwd05", "user5", "user05", "1999-11-11", "M", "z9616558@gmail.com", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("user06", "passwd06", "user6", "user05", "1999-11-11", "M", "z9616558@naver.com", 0, "01025756558"); 
+INSERT INTO member (userId, password, nickName, name, birthDate, gender, email, isAdmin, phoneNumber) values ("admin1", "admin1", "admin1", "admin1", "1999-01-01", "F", "ddh05130@daum.net", 1, "01025756558");

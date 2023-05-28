@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보수정</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link th:inline="css" th:href="@{/css/member_modify.css}" rel="stylesheet">
+    <script src="/js/signup.js"></script>
+    <script type="text/javascript" layout:fragment="script" th:inline="javascript">
+
+        function checkModify() {
+            $.ajax({
+                url: "/mypage/membermodify",
+                type: "POST",
+                data: $("form[name=frmMemberInsert]").serialize(),
+                success: function (data) {
+                    // Display an alert box if the member information is successfully updated
+                    alert("회원정보가 성공적으로 업데이트 되었습니다.");
+                },
+                error: function (data) {
+                    // Display an alert box if there is an error during the update process
+                    alert("회원정보 업데이트에 실패하였습니다.");
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<div layout:fragment="Content" class="modify_box">
+    <h3>회원정보수정</h3>
+    <div class="form_box">
+        <form th:action="@{/mypage/membermodify}"  th:object="${memberDTO}"  method="post" name="frmMemberInsert">
+            <input type="hidden" name="email">
+
+            <div class="form-group row">
+                <label for="nickName">닉네임:</label>
+                <input type="text" id="nickName" name="nickName" th:field="*{nickName}" required>
+                <button type="button" onclick="checkNickName()">중복확인</button>
+                <span class="nickNameCheck"></span>
+            </div>
+
+            <div class="form-group row">
+                <label for="name">이름:</label>
+                <input name="name" id="name" type="text" th:field="*{name}" required>
+            </div>
+
+            <div>
+                <label for="phoneNumber">(선택)전화번호:</label>
+                <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" />
+            </div>
+
+            <div>
+                <label for="zipcode">(선택)우편번호:</label>
+                <input id="zipcode" name="zipcode" type="text" class="form-control" placeholder="zipcode" th:field="*{zipcode}" readonly>
+                <input type="button" value="우편번호 검색" onclick="execDaumPostcode();">
+            </div>
+
+            <div class="form-group row">
+                <label for="address1">주소1</label>
+                <input name="address1" id="address1" type="text" th:field="*{address1}">
+            </div>
+
+            <div class="form-group row">
+                <label for="address2">주소2</label>
+                <input name="address2" id="address2" type="text" th:field="*{address2}">
+            </div>
+
+            <div>
+                <button type="submit" onclick="checkModify()">회원정보 수정</button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>
