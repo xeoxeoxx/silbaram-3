@@ -107,17 +107,18 @@
 <script layout:fragment="script" th:inline="javascript">
 	 let page = 2;
 
-	function goDetails(e, bid) {
-		e.preventDefault();
-		e.stopPropagation();
+	 function goDetails(e, bid) {
+		 e.preventDefault();
+		 e.stopPropagation();
 
-		let bkid = e.target.className
-		if (bkid == null || bkid == undefined || bkid.length == 0) {
-			bkid = bid
-		}
+		 let bkid = bid;
+		 if (typeof bkid !== 'string') {
+			 bkid = bid.className;
+		 }
 
-		location.href = `/products/detail?bkid=${bkid}`
-	}
+		 location.href = `/products/detail?bkid=${bkid}`;
+	 }
+
 
 	function infinityScroll() {
 		console.log("!")
