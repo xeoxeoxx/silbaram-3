@@ -31,11 +31,30 @@ public class MemberQuitController {
         if (mid == null) { // 로그인하지 않은 사용자는 로그인 페이지로 이동
             return "redirect:/login";
         }
+        else {
+            MemberDTO memberDTO = memberService.getMemberByMid(mid); // 회원정보를 조회함
+            log.info(memberDTO);
+            model.addAttribute("memberDTO", memberDTO);
+            if (memberDTO.getUserId().startsWith("ka_")) {
+                return "member/member_quit_kakao";
+            }else {
+                return "member/member_quit";
+            }
 
-        MemberDTO memberDTO = memberService.getMemberByMid(mid); // 회원정보를 조회함
-        log.info(memberDTO);
-        model.addAttribute("memberDTO", memberDTO);
-        return "member/member_quit";
+        }
+
+    }
+
+    @PostMapping("/mypage/memberquitkakao")
+    public String checkQuit(HttpSession session, Model model,
+                            MemberDTO memberDTO,RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+        Long mid = (Long) session.getAttribute("mid");
+        memberDTO.setMid(mid);
+        session.setAttribute("mid", memberDTO.getMid());
+        model.addAttribute("msg", "회원탈퇴 처리가 완료되었습니다.");
+        memberService.quitMember(memberDTO);
+        session.invalidate();
+        return "member/member_quit_complete";
     }
 
     @PostMapping("/mypage/memberquit")
@@ -57,11 +76,11 @@ public class MemberQuitController {
                 return "member/member_quit";
             }
             else {
-
                 memberDTO.setMid(mid);
                 session.setAttribute("mid", memberDTO.getMid());
                 model.addAttribute("msg", "회원탈퇴 처리가 완료되었습니다.");
                 memberService.quitMember(memberDTO);
+                session.invalidate();
                 return "member/member_quit_complete";
             }
         }

@@ -19,25 +19,17 @@
 
 <div layout:fragment="Content" class="quit_box">
 <h3>회원탈퇴</h3>
-<div class="form_box">
-    <form th:action="@{/mypage/memberquit}"  th:object="${memberDTO}" method="post" name="frmPw">
-
-        <div>
-            <div>
-                <label for="password">기존 비밀번호:</label>
-                <input type="password" id="password" name="oldPassword" onchange="pwCheck()" maxlength="20 "required/>
-                <span id="pwValid"></span><br>
-                <label for="password2">비밀번호 재확인:</label>
-                <input type="password" id="password2" name="password2" onchange="pwCheck()" maxlength="20" required/>
-                <span id="pwSame"></span><br>
+    <div class="form_box">
+        <form th:action="@{/mypage/memberquitkakao}"  th:object="${memberDTO}" method="post" name="frmPw">
+            <div class="form-group row">
+                <p>정말 탈퇴하시겠습니까?</p>
             </div>
-            <div>
-                <button type="submit" class="quit-submit">회원탈퇴</button>
+            <div class="form-group row">
+                <button type="submit" class="quit-submit">탈퇴할래요</button>
+                <button type="button"><a href="/">탈퇴 안 할래요</a></button>
             </div>
-        </div>
-
-    </form >
-</div>
+        </form >
+    </div>
 </div>
 <script src="/js/signup.js"></script>
 <script type="text/javascript">

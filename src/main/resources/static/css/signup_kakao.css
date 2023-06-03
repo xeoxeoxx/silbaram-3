@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#contentBox {
+    height: 1100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#signupBox {
+    width: 900px;
+    height: 1000px;
+    margin: 0 auto;
+    border: 1.5px solid #50CDBB;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 3px 3px 5px #93CAC2;
+    padding: 20px;
+}
+
+#signupBox div {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#signupBox div label {
+    display: block;
+    width: 150px;
+    text-align: right;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 16px;
+}
+
+#signupBox div input[type="text"],
+#signupBox div input[type="password"],
+#signupBox div input[type="date"],
+#signupBox div input[type="tel"],
+#signupBox div input[type="number"] {
+    display: block;
+    width: 200px;
+    height: 40px;
+    background-color: #E0F5F2;
+    border: none;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+#signupBox div button {
+    display: block;
+    background-color: #50CDBB;
+    border: none;
+    width: 80px;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #333;
+    height: 40px;
+    cursor: pointer;
+}
+
+#signupBox div span {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+#signupBox div input[type="radio"] {
+    -webkit-appearance: radio;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#signupBox div:nth-child(9) {
+    align-items: flex-start;
+}
+
+#signupBox div:nth-child(9) > div select {
+    margin-left: 10px;
+    height: 40px;
+}
+
+#signupBox div:nth-child(9) > div button {
+    margin-left: 10px;
+    width: 80px;
+    height: 40px;
+}
+
+#signupBox div:nth-child(9) div:last-child input {
+    margin-left: 165px;
+    background-color: #88C4BE;
+    cursor: pointer;
+}
+
+#signupBox div:nth-child(11) input[type="button"] {
+    background-color: #50CDBB;
+    width: 90px;
+    height: 40px;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#signupBox div:nth-child(12) input[type="text"],
+#signupBox div:nth-child(12) input[type="password"] {
+    width: 500px;
+    height: 40px;
+    padding: 5px;
+}
+
+#signupBox div:last-child {
+    justify-content: flex-end;
+}
+
+#signupBox div:last-child button {
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #50CDBB;
+    margin-right: 30px;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#signupBox div:last-child button:hover {
+    background-color: #4BBBA7;
+}
+
+#signupBox input:read-only {
+    background-color: #F4F4F4;
+}

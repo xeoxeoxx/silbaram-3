@@ -113,8 +113,12 @@ public class MemberController {
         model.addAttribute("cartDtoList", cartService.getAll(memberId));
         model.addAttribute("memberDTO", memberDTO);
         log.info(memberDTO);
+        if (memberDTO.getUserId().startsWith("ka_")) {
+            return "member/mypage_kakao";
+        }else {
+            return "member/mypage";
+        }
 
-        return "member/mypage";
     }
 
 }
