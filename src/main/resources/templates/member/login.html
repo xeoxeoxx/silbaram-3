@@ -50,13 +50,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script layout:fragment="script" th:inline="javascript">
     $(document).ready(function() {
-        let message = "[[${msg}]]";
+        const message = /*[[${msg}]]*/ null;
         console.log(message);
-        if (message !== "" && message !== "null") {
+        if (message && message !== null) {
             alert(message);
-        }else {
         }
-    })
+    });
 </script>
+
 </body>
 </html>
