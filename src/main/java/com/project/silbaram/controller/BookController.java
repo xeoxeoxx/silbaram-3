@@ -45,6 +45,17 @@ public class BookController {
 
         PageResponseDTO responseDTO = bookService.list(pageRequestDTO);
 
+        List<BookDTO> bookList = responseDTO.getDtoList();
+        for (BookDTO bookDTO : bookList) {
+            if (bookDTO.getBookImage() != null) {
+                String bookImageUrl[] = bookDTO.getBookImage().split("/");
+                String bookImageFileName = bookImageUrl[bookImageUrl.length - 1];
+                bookImageFileName = "/google/image/" + bookImageFileName;
+                bookDTO.setBookImage(bookImageFileName);
+                model.addAttribute("bookImageFileName", bookImageFileName);
+            }
+        }
+
         model.addAttribute("category", category);
         model.addAttribute("writerTotal",writerTotal);
         model.addAttribute("bookTotal",bookTotal);
