@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -23,7 +24,10 @@ public class SignUpController {
     private final MemberServiceImpl memberService;
 
     @GetMapping("/signupkakao")
-    public String  addMemberKakaoGET(Model model) {
+    public String  addMemberKakaoGET(Model model, HttpSession session) {
+        if (session.getAttribute("mid") != null) {
+            return "redirect:/index";
+        }
 
         log.info("addMemberGET...");
         model.addAttribute("memberDTO", new MemberDTO());
@@ -46,7 +50,10 @@ public class SignUpController {
     }
 
     @GetMapping("/signup")
-    public String  addMemberGET(Model model) {
+    public String addMemberGET(Model model, HttpSession session) {
+        if (session.getAttribute("mid") != null) {
+            return "redirect:/index";
+        }
 
         log.info("addMemberGET...");
         model.addAttribute("memberDTO", new MemberDTO());
