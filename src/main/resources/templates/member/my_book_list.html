@@ -43,7 +43,7 @@ lang="en">
                 <div th:with="link = ${pageRequestDTO.getLink()}">
                     <div th:each="dto : ${responseDTO.dtoList}">
                         <div class="bookImage">
-
+                            <img th:src="${dto.bookImage}" alt="책 이미지">
                         </div>
                         <div class="bookData">
                             <p th:text="${dto.bookName}"></p>

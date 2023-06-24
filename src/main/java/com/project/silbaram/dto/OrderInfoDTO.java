@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /*
  * 기존 orderlist테이블.
@@ -18,11 +19,17 @@ import java.time.LocalDateTime;
 public class OrderInfoDTO {
     private Long ogid; // 주문번호 (!= orderNum)
     private Long bookId;
-    private String bookName;
+//    private String bookName;
     private int bookPrice;
     private Long oid; //OrderList조인용
     private String orderNum;
     private Long memberId;
     private boolean status;
+
+
+    /* book */
+    private String bookName;
+    private String bookImage;
+    private String writerName;
 
 }

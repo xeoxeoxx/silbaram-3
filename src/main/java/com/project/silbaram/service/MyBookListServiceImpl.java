@@ -1,11 +1,8 @@
 package com.project.silbaram.service;
 
 import com.project.silbaram.dao.MyBookListDAO;
-import com.project.silbaram.dto.BookDTO;
-import com.project.silbaram.dto.OrderListDTO;
-import com.project.silbaram.dto.PageRequestDTO;
-import com.project.silbaram.dto.PageResponseDTO;
-import com.project.silbaram.vo.OrderListVO;
+import com.project.silbaram.dto.*;
+import com.project.silbaram.vo.OrderInfoVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -25,20 +22,20 @@ public class MyBookListServiceImpl implements MyBookListService {
     private final ModelMapper modelMapper;
 
     @Override
-    public PageResponseDTO<OrderListDTO> getAllMyBooks(PageRequestDTO pageRequestDTO, Long memberId) {
-        List<OrderListVO> voList = myBookListDAO.selectAllMyBooks(pageRequestDTO, memberId);
+    public PageResponseDTO<OrderInfoDTO> getAllMyBooks(PageRequestDTO pageRequestDTO, Long memberId) {
+        List<OrderInfoVO> voList = myBookListDAO.selectAllMyBooks(pageRequestDTO, memberId);
         log.info(voList);
-        List<OrderListDTO> dtoList = new ArrayList<>();
-        for (OrderListVO orderListVO: voList
-             ) {
-            OrderListDTO dto =modelMapper.map(orderListVO, OrderListDTO.class); // vo를 dto로 mapping
-            dto.setBook(modelMapper.map(orderListVO, BookDTO.class));
+        List<OrderInfoDTO> dtoList = new ArrayList<>();
+        for (OrderInfoVO orderInfoVO: voList
+        ) {
+            OrderInfoDTO dto =modelMapper.map(orderInfoVO, OrderInfoDTO.class); // vo를 dto로 mapping
+//            dto.setBook(modelMapper.map(orderInfoVO, BookDTO.class));
             dtoList.add(dto);
         }
         // 전체 갯수
         int total = myBookListDAO.getCount(pageRequestDTO);
 
-        PageResponseDTO<OrderListDTO> pageResponseDTO = PageResponseDTO.<OrderListDTO>withAll()
+        PageResponseDTO<OrderInfoDTO> pageResponseDTO = PageResponseDTO.<OrderInfoDTO>withAll()
                 .dtoList(dtoList)
                 .total(total)
                 .pageRequestDTO(pageRequestDTO)

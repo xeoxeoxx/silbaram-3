@@ -22,8 +22,4 @@ public class OrderListDTO {
     private boolean status;
     private String orderName;
 
-    /* book */
-    private BookDTO book;
-    private String bookName;
-    private String writerName;
 }

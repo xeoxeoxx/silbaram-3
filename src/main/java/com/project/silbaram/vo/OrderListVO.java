@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderListVO {
-    private Long oid;
+    private Long ogid;
     private LocalDateTime orderDate;
     private Long memberID;
     private int totalPrice;

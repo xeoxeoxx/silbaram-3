@@ -1,5 +1,6 @@
 package com.project.silbaram.vo;
 
+import com.project.silbaram.dto.BookDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,11 +17,15 @@ import java.time.LocalDateTime;
 public class OrderInfoVO {
     private Long ogid; // 주문번호 (!= orderNum)
     private Long bookId;
-    private String bookName;
+//    private String bookName;
     private int bookPrice;
     private Long oid; //OrderList조인용
     private String orderNum;
     private Long memberId;
     private boolean status;
 
+    /* book */
+    private String bookName;
+    private String bookImage;
+    private String writerName;
 }

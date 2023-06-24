@@ -102,6 +102,12 @@
     margin-bottom: 10px;
 }
 
+.bookImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .bookData{
     width: 100%;
     flex-direction: column;
