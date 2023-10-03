@@ -87,22 +87,48 @@ function checkNickName() {
     });
 }
 
+$(document).ready(function () {
+    $('#mail-Check-Btn').click(function () {
+        const email = $('#email1').val() + $('#email2').val();
+        const checkInput = $('.mail-check-input');
 
-$('#mail-Check-Btn').click(function () {
-    const email = $('#email1').val() + $('#email2').val(); // 이메일 주소값 얻어오기!
-    const checkInput = $('.mail-check-input') // 인증번호 입력하는곳
+        console.log("이메일 인증 버튼 클릭 인식");
 
-    $.ajax({
-        type: 'get',
-        url: /*[[${#httpServletRequest.requestURL}]]*/ 'mailCheck?email=' + email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-        success: function (data) {
-            console.log("data : " + data);
-            checkInput.attr('disabled', false);
-            code = data;
-            alert('인증번호가 전송되었습니다.')
-        }
-    }); // end ajax
-}); // end send eamil
+
+        $.ajax({
+            type: 'get',
+            url: 'mailCheck?email=' + email, // GET 방식으로 email을 URL에 포함시킬 때 문제 없음
+            success: function (data) {
+                    console.log("data : " + data);
+                    checkInput.prop('disabled', false); // .attr() 대신 .prop() 사용
+                    alert('인증번호가 전송되었습니다.');
+            },
+            error: function (error) {
+                console.error("에러 발생: " + error.statusText);
+            } // 에러 핸들링을 위한 error 함수 추가
+        });
+    });
+});
+
+
+// $('#mail-Check-Btn').click(function () {
+//     const email = $('#email1').val() + $('#email2').val(); // 이메일 주소값 얻어오기!
+//     const checkInput = $('.mail-check-input') // 인증번호 입력하는곳
+//
+//     console.log("이메일인증 버튼 클릭 인식");
+
+
+    // $.ajax({
+    //     type: 'get',
+    //     url: /*[[${#httpServletRequest.requestURL}]]*/ 'mailCheck?email=' + email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+    //     success: function (data) {
+    //         console.log("data : " + data);
+    //         checkInput.attr('disabled', false);
+    //         code = data;
+    //         alert('인증번호가 전송되었습니다.')
+    //     }
+    // }); // end ajax
+// }); // end send eamil
 
 // 인증번호 비교
 // blur -> focus가 벗어나는 경우 발생
